@@ -1,15 +1,11 @@
 package gocheck24
 
-import (
-	"fmt"
-)
-
 // Acknowledge is to set the order acknowledge to successful
-func Acknowledge(documentNumber int, r Request) error {
+func Acknowledge(documentNumber string, r Request) error {
 
 	// Config new request
 	c := Config{
-		Path:   fmt.Sprintf("/shop/document/%d/acknowledge", documentNumber),
+		Path:   "/shop/document/" + documentNumber + "/acknowledge",
 		Method: "PUT",
 	}
 
