@@ -13,7 +13,7 @@ go get github.com/jjideenschmiede/gocheck24
 
 Currently we have the following functions covered:
 
-- [Orders & Acknowledge](https://github.com/jjideenschmiede/check24#orders-acknowledge)
+- [Orders & Acknowledge](https://github.com/jjideenschmiede/gocheck24#orders-acknowledge)
 
 
 ## Orders & Acknowledge
