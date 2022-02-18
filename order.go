@@ -44,6 +44,7 @@ type OrdersReturnOrderInfo struct {
 	OrderPartiesReference OrdersReturnOrderPartiesReference `xml:"ORDER_PARTIES_REFERENCE"`
 	Currency              string                            `xml:"CURRENCY"`
 	Payment               OrdersReturnPayment               `xml:"PAYMENT"`
+	Remarks               []OrdersReturnRemarks             `xml:"REMARKS"`
 }
 
 type OrdersReturnParties struct {
@@ -92,6 +93,12 @@ type OrdersReturnPaymentTerms struct {
 type OrdersReturnTimeForPayment struct {
 	XmlName     xml.Name `xml:"TIME_FOR_PAYMENT"`
 	PaymentDate string   `xml:"PAYMENT_DATE"`
+}
+
+type OrdersReturnRemarks struct {
+	XmlName xml.Name `xml:"REMARKS"`
+	Key     string   `xml:"type,attr"`
+	Value   string   `xml:",chardata"`
 }
 
 type OrdersReturnOrderItemList struct {
