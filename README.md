@@ -38,7 +38,7 @@ if err != nil {
 
 ### Acknowledge
 
-With this function you confirm the order. The order number is required for this.
+With this function you confirm the order. The document number is required for this.
 
 ```go
 r := gocheck24.Request{
@@ -46,7 +46,7 @@ r := gocheck24.Request{
     Password: "your_password",
 }
 
-err := gocheck24.Acknowledge(3, r)
+err := gocheck24.Acknowledge("3", r)
 if err != nil {
     log.Fatalln(err)
 }
