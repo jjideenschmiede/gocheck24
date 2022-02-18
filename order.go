@@ -61,6 +61,7 @@ type OrdersReturnParty struct {
 
 type OrdersReturnAddress struct {
 	XmlName      xml.Name `xml:"ADDRESS"`
+	Name         string   `xml:"NAME"`
 	Name2        string   `xml:"NAME2"`
 	Name3        string   `xml:"NAME3"`
 	Street       string   `xml:"STREET"`
@@ -113,6 +114,7 @@ type OrdersReturnOrderItem struct {
 	Quantity        int                         `xml:"QUANTITY"`
 	OrderUnit       string                      `xml:"ORDER_UNIT"`
 	ProductPriceFix OrdersReturnProductPriceFix `xml:"PRODUCT_PRICE_FIX"`
+	PriceLineAmount float64                     `xml:"PRICE_LINE_AMOUNT"`
 }
 
 type OrdersReturnProductId struct {
