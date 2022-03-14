@@ -13,7 +13,6 @@ package gocheck24
 
 import (
 	"encoding/xml"
-	"fmt"
 )
 
 // OrdersReturn is to decode the xml return
@@ -159,8 +158,6 @@ func Orders(r Request) (OrdersReturn, error) {
 
 	// Close request body
 	defer response.Body.Close()
-
-	fmt.Println(response.Status)
 
 	// Check response status
 	err = statusCodes(response.Status)
