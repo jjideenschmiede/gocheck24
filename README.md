@@ -94,7 +94,7 @@ body := gocheck24.DISPATCHNOTIFICATION{
                     Value: "dhl",
                 },
             },
-            ShipmentId:         123456789,
+            ShipmentId:         "123456789",
             TrackingTracingUrl: "https://faketrackingurl.com",
 		},
     },
