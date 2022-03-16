@@ -36,7 +36,7 @@ type DispatchNotificationBodyInfo struct {
 	Parties                  DispatchNotificationBodyParties                  `xml:"PARTIES"`
 	SupplierIdref            DispatchNotificationBodySupplierIdref            `xml:"bmecat:SUPPLIER_IDREF"`
 	ShipmentPartiesReference DispatchNotificationBodyShipmentPartiesReference `xml:"SHIPMENT_PARTIES_REFERENCE"`
-	ShipmentId               int                                              `xml:"SHIPMENT_ID"`
+	ShipmentId               string                                           `xml:"SHIPMENT_ID"`
 	TrackingTracingUrl       string                                           `xml:"TRACKING_TRACING_URL"`
 }
 
