@@ -95,7 +95,7 @@ body := gocheck24.DISPATCHNOTIFICATION{
                 },
             },
             ShipmentId:         "123456789",
-            TrackingTracingUrl: "https://faketrackingurl.com",
+            TrackingTracingUrl: nil,
 		},
     },
     DispatchNotificationItemList: gocheck24.DispatchNotificationBodyDispatchNotificationItemList{
