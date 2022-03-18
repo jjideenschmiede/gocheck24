@@ -37,7 +37,7 @@ type DispatchNotificationBodyInfo struct {
 	SupplierIdref            DispatchNotificationBodySupplierIdref            `xml:"bmecat:SUPPLIER_IDREF"`
 	ShipmentPartiesReference DispatchNotificationBodyShipmentPartiesReference `xml:"SHIPMENT_PARTIES_REFERENCE"`
 	ShipmentId               string                                           `xml:"SHIPMENT_ID"`
-	TrackingTracingUrl       string                                           `xml:"TRACKING_TRACING_URL"`
+	TrackingTracingUrl       *string                                          `xml:"TRACKING_TRACING_URL"`
 }
 
 type DispatchNotificationBodyParties struct {
@@ -104,13 +104,25 @@ type DispatchNotificationBodyShipmentPartiesReference2 struct {
 	DeliveryIdref DispatchNotificationBodyDeliveryIdref `xml:"DELIVERY_IDREF"`
 }
 
+// DispatchNotificationReturn is to decode the xml data
+type DispatchNotificationReturn struct {
+	XmlName xml.Name                         `xml:"ERRORS"`
+	Item    []DispatchNotificationReturnItem `xml:"item"`
+}
+
+type DispatchNotificationReturnItem struct {
+	XmlName xml.Name `xml:"item"`
+	Key     string   `xml:"type,attr"`
+	Value   string   `xml:",chardata"`
+}
+
 // DispatchNotification is to send the shipping information to check24
-func DispatchNotification(body DISPATCHNOTIFICATION, r Request) error {
+func DispatchNotification(body DISPATCHNOTIFICATION, r Request) (DispatchNotificationReturn, error) {
 
 	// Convert body
 	convert, err := xml.Marshal(body)
 	if err != nil {
-		return err
+		return DispatchNotificationReturn{}, err
 	}
 
 	// Config new request
@@ -123,7 +135,7 @@ func DispatchNotification(body DISPATCHNOTIFICATION, r Request) error {
 	// Send new request
 	response, err := c.Send(r)
 	if err != nil {
-		return err
+		return DispatchNotificationReturn{}, err
 	}
 
 	// Close request body
@@ -132,10 +144,14 @@ func DispatchNotification(body DISPATCHNOTIFICATION, r Request) error {
 	// Check response status
 	err = statusCodes(response.Status)
 	if err != nil {
-		return err
+		return DispatchNotificationReturn{}, err
 	}
 
+	// Decode data
+	var decode DispatchNotificationReturn
+	xml.NewDecoder(response.Body).Decode(&decode)
+
 	// Return data
-	return nil
+	return decode, nil
 
 }
