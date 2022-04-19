@@ -17,10 +17,11 @@ import (
 
 // OrdersReturn is to decode the xml return
 type OrdersReturn struct {
-	XmlName       xml.Name                  `xml:"ORDER"`
-	OrderHeader   OrdersReturnOrderHeader   `xml:"ORDER_HEADER"`
-	OrderItemList OrdersReturnOrderItemList `xml:"ORDER_ITEM_LIST"`
-	OrderSummary  OrdersReturnOrderSummary  `xml:"ORDER_SUMMARY"`
+	XmlName        xml.Name                  `xml:"ORDER"`
+	OrderHeader    OrdersReturnOrderHeader   `xml:"ORDER_HEADER"`
+	OrderItemList  OrdersReturnOrderItemList `xml:"ORDER_ITEM_LIST"`
+	OrderSummary   OrdersReturnOrderSummary  `xml:"ORDER_SUMMARY"`
+	DocumentNumber string                    `xml:"omitempty"`
 }
 
 type OrdersReturnOrderHeader struct {
@@ -141,7 +142,7 @@ type OrdersReturnOrderSummary struct {
 	TotalAmount  float64  `xml:"TOTAL_AMOUNT"`
 }
 
-// Orders is to get an offer by id
+// Orders is to get an offer
 func Orders(r Request) (OrdersReturn, error) {
 
 	// Config new request
@@ -168,6 +169,9 @@ func Orders(r Request) (OrdersReturn, error) {
 	// Decode data
 	var decode OrdersReturn
 	xml.NewDecoder(response.Body).Decode(&decode)
+
+	// Add document number
+	decode.DocumentNumber = response.Header.Get("X-DocumentNumber")
 
 	// Return data
 	return decode, nil
