@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	baseUrl = "https://opentrans.shopping.check24.de/api"
+	baseUrl = "https://opentrans.moebel.check24.de/api"
 )
 
 // Config is to define config data
